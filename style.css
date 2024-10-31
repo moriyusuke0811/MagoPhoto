@@ -1,7 +1,8 @@
 
 
 .deco-file{
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto 
 }
 .deco-file label{
     display: inline-block;
