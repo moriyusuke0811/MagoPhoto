@@ -5,9 +5,10 @@
     color: #1E88E5;
     text-align: center;
     padding: 20px 40px;
-    border-radius: 50%;
     height: 100px;
     width: 100px;
+    border-radius: 50%;
+    
 }
 .deco-file label:hover{
     cursor: pointer;
