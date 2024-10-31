@@ -11,3 +11,16 @@
     text-align: center;
     margin: 10px 0;
 }
+.deco-file label{
+    display: inline-block;
+    border: 2px solid #1E88E5;
+    color: #1E88E5;
+    text-align: center;
+    padding: 20px 40px;
+}
+.deco-file label:hover{
+    cursor: pointer;
+}
+.deco-file input[type="file"]{
+    display: none;
+}
