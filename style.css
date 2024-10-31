@@ -6,6 +6,8 @@
     text-align: center;
     padding: 20px 40px;
     border-radius: 50%;
+    height: 100px;
+    width: 100px;
 }
 .deco-file label:hover{
     cursor: pointer;
