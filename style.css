@@ -11,6 +11,8 @@
 }
 .deco-file label:hover{
     cursor: pointer;
+    color: #ffffff;
+    background-color: #1E88E5;
 }
 .deco-file input[type="file"]{
     display: none;
