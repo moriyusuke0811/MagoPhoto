@@ -1,7 +1,8 @@
 #daimei{
     font-size: 97px;
     font-weight: bold;
-    font-family: Arial; 
+    font-family: Arial;
+    margin-left: 10px; 
 }
 .deco-file{
     text-align:  center;
