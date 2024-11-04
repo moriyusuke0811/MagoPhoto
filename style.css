@@ -47,22 +47,22 @@ footer {
     margin: 0 15px;
   }
   
-  #home-menu li a {
-    text-decoration: none;
-    color: #000000;
-    font-weight: bold;
-    font-size: 0.9em;
-  }
+#home-menu li a {
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
+  font-size: 0.9em;
+}
   
-  #home-menu {
-    display: flex;
-    margin-right: auto;
-    margin-left: auto;
-    width: 33em;
-  }
+#home-menu {
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+   width: 33em;
+}
 
   
-  #home-menu a {
-    text-decoration-color: transparent;
-  }
+#home-menu a {
+  text-decoration-color: transparent;
+}
   
