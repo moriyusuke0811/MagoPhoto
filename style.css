@@ -35,3 +35,25 @@ header {
 .deco-file input[type="file"]{
     display: none;
 }
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: #d5d5d5;
+}
+#home-menu li {
+    list-style: none;
+    margin: 0 15px;
+  }
+  
+  #home-menu li a {
+    text-decoration: none;
+    color: #1f687a;
+    font-weight: bold;
+    font-size: 0.9em;
+  }
+  
+  #home-menu {
+    display: flex
+  }
