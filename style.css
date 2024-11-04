@@ -57,3 +57,14 @@ footer {
   #home-menu {
     display: flex
   }
+  #home-menu {
+    margin: auto;
+    margin-right: auto;
+    width: 33em
+  }
+  
+  #home-menu a {
+    color: #dc6688;
+    text-decoration-color: transparent;
+  }
+  
