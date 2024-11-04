@@ -56,12 +56,11 @@ footer {
   
   #home-menu {
     display: flex
-  }
-  #home-menu {
     margin: auto;
     margin-right: auto;
-    width: 33em
+    width: 33em;
   }
+
   
   #home-menu a {
     text-decoration-color: transparent;
