@@ -55,6 +55,7 @@ footer {
 #home-menu li {
   list-style: none;
   margin: 40px;
+  width: 800px;
 }
 #home-menu li a {
   text-decoration: none;
