@@ -43,14 +43,15 @@ footer {
     background: #ffffff;
     margin-right: auto;
 }
-
+#home-menu li {
+  list-style: none;
+}
+  
 #home-menu li a {
   text-decoration: none;
   color: #000000;
   font-weight: bold;
   font-size: 0.9em;
-  list-style: none;
-  margin: 0 15px;
 }
   
 #home-menu {
