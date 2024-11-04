@@ -43,5 +43,5 @@ footer {
     height: 50px;
     background: #ffffff;
     margin-right: auto;
-    box-shadow: 0 -5px 8px rgb(0, 0, 0);
+    box-shadow: 0 -5px 8px rgb(0, 0, 0.05);
 }
