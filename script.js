@@ -32,7 +32,7 @@ function uploadFile() {
 
     const metadata = {
         name: file.name, // ファイル名
-        parents: ["15-PrCE4CQRTijNH5pxyKCDBBv3Z1LACN"], // フォルダID
+        parents: ["1Re2Li9tMvtCmbJ64OLmul5kmWPnuHYHs"], // フォルダID
     };
 
     const formData = new FormData();
