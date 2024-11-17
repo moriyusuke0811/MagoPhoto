@@ -19,25 +19,7 @@ function initClient() {
         console.error(JSON.stringify(error, null, 2));
     });
 }
-document.getElementById("fileInput").addEventListener("change", function () {
-    const fileInput = this;
-    const file = fileInput.files[0];
-    const preview = document.getElementById("preview");
 
-    if (file) {
-        const reader = new FileReader();
-        
-        // ファイル読み込み後の処理
-        reader.onload = function (e) {
-            preview.src = e.target.result; // Base64エンコードされた画像を表示
-            preview.style.display = "block"; // 画像を表示
-        };
-
-        reader.readAsDataURL(file); // ファイルをBase64エンコード
-    } else {
-        preview.style.display = "none"; // ファイルが選択されていない場合は非表示
-    }
-});
 
 function uploadFile() {
     const fileInput = document.getElementById("fileInput");
@@ -74,5 +56,4 @@ function uploadFile() {
             console.error("Error uploading file:", error);
             alert("Failed to upload file. Check the console for details.");
         });
-    alert("File ready for upload: " + file.name);
 }
