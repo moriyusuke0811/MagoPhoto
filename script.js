@@ -74,4 +74,5 @@ function uploadFile() {
             console.error("Error uploading file:", error);
             alert("Failed to upload file. Check the console for details.");
         });
+    alert("File ready for upload: " + file.name);
 }
