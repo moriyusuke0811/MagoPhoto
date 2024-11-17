@@ -89,9 +89,7 @@ function uploadFile() {
 
 // Google APIライブラリの読み込みと初期化
 function handleClientLoad() {
-    gapi.load('client:auth2', () => {
-        initApiClient(); // Google APIの初期化が完了したら、次に進む
-    });
+    gapi.load('client:auth2', initApiClient); // Google APIの初期化が完了したら、次に進む
 }
 
 // 画像プレビューを表示する
