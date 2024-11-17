@@ -1,4 +1,4 @@
-const CLIENT_ID = '1055087349247-nrekoe5ju1kitahjvmthqu6gbnop2io1.apps.googleusercontent.com';  // クライアントIDを設定
+const CLIENT_ID = '1055087349247-nrekoe5ju1kitahjvmthqu6gbnop2io1.apps.googleusercontent.com1055087349247-4pll7vck0e1toe77qkq9tsrtimogjke9.apps.googleusercontent.com';  // クライアントIDを設定
 const API_KEY = 'AIzaSyCjHBk7dKtZwv-ASKWyLyq9SW25AbBXvmw';      // APIキーを設定
 const SCOPES = 'https://www.googleapis.com/auth/drive.file';
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
