@@ -17,6 +17,7 @@ function initApiClient() {
         discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
         scope: SCOPES
     }).then(() => {
+        console.log('API client initialized');
         // 認証状態を確認
         checkAuth();
     }).catch(error => {
@@ -26,17 +27,22 @@ function initApiClient() {
 
 // Google APIの認証
 function handleAuthClick(event) {
-    gapi.auth2.getAuthInstance().signIn().then(() => {
-        uploadFile();  // 認証後にファイルアップロードを開始
-    }).catch(error => {
-        console.error("認証エラー:", error);
-    });
+    const authInstance = gapi.auth2.getAuthInstance();
+    if (authInstance) {
+        authInstance.signIn().then(() => {
+            uploadFile();  // 認証後にファイルアップロードを開始
+        }).catch(error => {
+            console.error("認証エラー:", error);
+        });
+    } else {
+        console.error('Google API client not initialized yet.');
+    }
 }
 
 // 認証状態を確認
 function checkAuth() {
     const authInstance = gapi.auth2.getAuthInstance();
-    if (authInstance.isSignedIn.get()) {
+    if (authInstance && authInstance.isSignedIn.get()) {
         console.log('認証済み');
     } else {
         console.log('未認証');
@@ -111,7 +117,7 @@ document.getElementById("fileInput").addEventListener("change", function () {
 document.getElementById("uploadButton").addEventListener("click", function () {
     // ユーザーが認証していなければ、認証を促す
     const authInstance = gapi.auth2.getAuthInstance();
-    if (!authInstance.isSignedIn.get()) {
+    if (!authInstance || !authInstance.isSignedIn.get()) {
         handleAuthClick();  // 認証が必要な場合は認証を促す
     } else {
         uploadFile();  // 既に認証済みなら、アップロードを実行
