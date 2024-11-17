@@ -19,6 +19,8 @@ function initApiClient() {
     }).then(() => {
         // 認証状態を確認
         checkAuth();
+    }).catch(error => {
+        console.error("APIの初期化に失敗しました:", error);
     });
 }
 
@@ -26,6 +28,8 @@ function initApiClient() {
 function handleAuthClick(event) {
     gapi.auth2.getAuthInstance().signIn().then(() => {
         uploadFile();  // 認証後にファイルアップロードを開始
+    }).catch(error => {
+        console.error("認証エラー:", error);
     });
 }
 
@@ -105,5 +109,11 @@ document.getElementById("fileInput").addEventListener("change", function () {
 
 // アップロードボタンにイベントを追加
 document.getElementById("uploadButton").addEventListener("click", function () {
-    uploadFile();
+    // ユーザーが認証していなければ、認証を促す
+    const authInstance = gapi.auth2.getAuthInstance();
+    if (!authInstance.isSignedIn.get()) {
+        handleAuthClick();  // 認証が必要な場合は認証を促す
+    } else {
+        uploadFile();  // 既に認証済みなら、アップロードを実行
+    }
 });
