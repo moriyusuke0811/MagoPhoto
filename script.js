@@ -21,35 +21,38 @@ function initClient() {
 }
 
 function uploadFile() {
-    const fileInput = document.getElementById('fileInput');
+    const fileInput = document.getElementById("fileInput");
     const file = fileInput.files[0];
-    
+
     if (!file) {
-        alert("Please select a file.");
+        alert("Please select a file first.");
         return;
     }
 
-    gapi.auth2.getAuthInstance().signIn().then(() => {
-        const form = new FormData();
-        form.append('metadata', new Blob([JSON.stringify({
-            'name': file.name,
-            'mimeType': file.type,
-            'parents': ['15-PrCE4CQRTijNH5pxyKCDBBv3Z1LACN']  // アップロード先のフォルダIDを設定
-        })], {type: 'application/json'}));
-        form.append('file', file);
+    const metadata = {
+        name: file.name, // ファイル名
+        parents: ["15-PrCE4CQRTijNH5pxyKCDBBv3Z1LACN"], // フォルダID
+    };
 
-        fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
-            method: 'POST',
-            headers: new Headers({ 'Authorization': 'Bearer ' + gapi.auth.getToken().access_token }),
-            body: form
-        }).then((response) => response.json()).then((data) => {
-            console.log("File uploaded successfully:", data);
+    const formData = new FormData();
+    formData.append(
+        "metadata",
+        new Blob([JSON.stringify(metadata)], { type: "application/json" })
+    );
+    formData.append("file", file);
+
+    gapi.client
+        .request({
+            path: "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+            method: "POST",
+            body: formData,
+        })
+        .then((response) => {
+            console.log("File uploaded successfully:", response);
             alert("File uploaded successfully!");
-        }).catch((error) => {
+        })
+        .catch((error) => {
             console.error("Error uploading file:", error);
-            alert("Error uploading file");
+            alert("Failed to upload file. Check the console for details.");
         });
-    });
 }
-
-document.addEventListener("DOMContentLoaded", handleClientLoad);
