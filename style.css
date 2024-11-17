@@ -64,8 +64,16 @@ footer {
   font-size: 1.5em;
 }
 #preview {
-  max-width: 300px;
-  max-height: 300px;
+  margin-top: 20px;
+  max-width: 100%;  /* 横幅を親要素に合わせて調整 */
+  max-height: 300px;  /* 高さは最大300px */
   border: 1px solid #ccc;
-  display: none;
+  display: block; /* プレビューを表示 */
+  margin-bottom: 20px; /* プレビューとボタンの間に余白 */
+}
+
+/* ファイル選択とアップロードボタンを中央揃え */
+#uploadButton {
+  display: block;
+  margin: 20px auto; /* ボタンを中央に配置 */
 }
