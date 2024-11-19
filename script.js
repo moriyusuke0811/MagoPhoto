@@ -9,27 +9,22 @@ const FOLDER_ID = '1Re2Li9tMvtCmbJ64OLmul5kmWPnuHYHs';
 // スコープ設定（Drive APIの読み書き権限）
 const SCOPES = 'https://www.googleapis.com/auth/drive.file';
 
+function handleClientLoad() {
+    gapi.load('client:auth2', initApiClient);
+}
 
 function initApiClient() {
     gapi.client.init({
-        apiKey: API_KEY,
-        clientId: CLIENT_ID,
+        apiKey: 'YOUR_API_KEY',
+        clientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
         discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
-        scope: SCOPES,
+        scope: 'https://www.googleapis.com/auth/drive.file',
     }).then(() => {
-        console.log('API client initialized.');
+        console.log('Google API initialized successfully.');
     }).catch((error) => {
         console.error('Error initializing API client:', error);
     });
 }
-
-/**
- * Google API ライブラリの読み込み完了時に実行
- */
-function handleClientLoad() {
-    gapi.load('client:auth2', initApiClient); 
-}
-
 /**
  * Google アカウントで認証
  */
