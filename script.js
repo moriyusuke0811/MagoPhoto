@@ -27,7 +27,7 @@ function initApiClient() {
  * Google API ライブラリの読み込み完了時に実行
  */
 function handleClientLoad() {
-    gapi.load('client:auth2', initApiClient);
+    gapi.load('client:auth2', initApiClient); 
 }
 
 /**
