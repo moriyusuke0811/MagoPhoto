@@ -29,18 +29,29 @@ function initApiClient() {
  * Google アカウントで認証
  */
 function handleAuthClick() {
-    const authInstance = gapi.auth2?.getAuthInstance();
-    if (!authInstance) {
-        alert('APIが正しく初期化されていません。ページを再読み込みしてください。');
-        return;
-    }
+    try {
+        // gapi.auth2が初期化されているか確認
+        const authInstance = gapi.auth2?.getAuthInstance();
+        if (!authInstance) {
+            alert('APIが正しく初期化されていません。ページを再読み込みしてください。');
+            console.error('gapi.auth2.getAuthInstance()が未定義です。');
+            return;
+        }
 
-    authInstance.signIn().then(() => {
-        console.log('User signed in.');
-        uploadFile();
-    }).catch((error) => {
-        console.error('Error during sign-in:', error);
-    });
+        // ユーザーサインイン処理
+        authInstance.signIn()
+            .then(() => {
+                console.log('User signed in.');
+                uploadFile(); // サインイン成功後にファイルアップロードを実行
+            })
+            .catch((error) => {
+                console.error('Error during sign-in:', error);
+                alert('サインイン中にエラーが発生しました。');
+            });
+    } catch (error) {
+        console.error('Unexpected error in handleAuthClick:', error);
+        alert('予期しないエラーが発生しました。');
+    }
 }
 
 /**
