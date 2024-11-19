@@ -21,6 +21,13 @@ function initApiClient() {
         scope: 'https://www.googleapis.com/auth/drive.file',
     }).then(() => {
         console.log('Google API initialized successfully.');
+        // Google APIが正常に初期化されてから認証を開始
+        const authInstance = gapi.auth2.getAuthInstance();
+        if (authInstance) {
+            console.log('AuthInstance initialized.');
+        } else {
+            console.error('AuthInstance not initialized.');
+        }
     }).catch((error) => {
         console.error('Error initializing API client:', error);
     });
