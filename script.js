@@ -21,7 +21,7 @@ function initApiClient() {
         scope: 'https://www.googleapis.com/auth/drive.file',
     }).then(() => {
         console.log('Google API initialized successfully.');
-        // Google APIが正常に初期化されてから認証を開始
+        // APIクライアントが初期化された後に認証処理を開始
         const authInstance = gapi.auth2.getAuthInstance();
         if (authInstance) {
             console.log('AuthInstance initialized.');
@@ -33,7 +33,7 @@ function initApiClient() {
     });
 }
 /**
- * Google アカウントで認証
+ * Googleアカウントで認証
  */
 function handleAuthClick() {
     try {
@@ -102,9 +102,7 @@ function uploadFile() {
     xhr.send(formData);
 }
 
-/**
- * ファイル選択時にプレビューを表示
- */
+// ファイル選択時にプレビューを表示
 document.getElementById("fileInput").addEventListener("change", function () {
     const file = this.files[0];
     const preview = document.getElementById("preview");
@@ -121,7 +119,5 @@ document.getElementById("fileInput").addEventListener("change", function () {
     }
 });
 
-/**
- * アップロードボタンのクリックイベント
- */
+// アップロードボタンのクリックイベント
 document.getElementById("uploadButton").addEventListener("click", handleAuthClick);
