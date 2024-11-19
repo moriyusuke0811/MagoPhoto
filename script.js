@@ -1,9 +1,5 @@
 let fileInput = document.getElementById('fileInput');
 
-function handleClientLoad() {
-    gapi.load('client:auth2', initApiClient);
-}
-
 function initApiClient() {
     gapi.client.init({
         apiKey: 'AIzaSyAynlZZ3NPud2M0yYocsKIf7PXM2xUsQns', // APIキー
@@ -15,6 +11,9 @@ function initApiClient() {
     }).catch((error) => {
         console.error('Error initializing API client:', error);
     });
+}
+function handleClientLoad() {
+    gapi.load('client:auth2', initApiClient);
 }
 
 function uploadFile() {
