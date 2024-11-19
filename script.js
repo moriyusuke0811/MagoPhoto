@@ -109,11 +109,13 @@ document.getElementById("fileInput").addEventListener("change", function () {
 
 // アップロードボタンにイベントを追加
 document.getElementById("uploadButton").addEventListener("click", function () {
-    // ユーザーが認証していなければ、認証を促す
-    const authInstance = gapi.auth2.getAuthInstance();
+    const authInstance = gapi.auth2?.getAuthInstance();
     if (!authInstance || !authInstance.isSignedIn.get()) {
-        handleAuthClick();  // 認証が必要な場合は認証を促す
+        handleAuthClick(); // 未認証の場合は認証を促す
     } else {
-        uploadFile();  // 既に認証済みなら、アップロードを実行
+        uploadFile(); // 認証済みならファイルアップロードを実行
     }
 });
+console.log('gapi:', gapi);
+console.log('gapi.auth2:', gapi?.auth2);
+console.log('Auth instance:', gapi.auth2?.getAuthInstance());
