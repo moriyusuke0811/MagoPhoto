@@ -1,7 +1,7 @@
 // クライアントID
-const CLIENT_ID = '1055087349247-4pll7vck0e1toe77qkq9tsrtimogjke9.apps.googleusercontent.com'; 
+const CLIENT_ID = '1055087349247-oq43fdsi17et65o0vj21c15c2acc5hps.apps.googleusercontent.com'; 
 //APIきー
-const API_KEY = 'AIzaSyAneFyaDoFnLqcwI5YyvOWGKRuqBDw6ju8'; 
+const API_KEY = 'AIzaSyAynlZZ3NPud2M0yYocsKIf7PXM2xUsQns'; 
 
 // Google DriveのフォルダID
 const FOLDER_ID = '1Re2Li9tMvtCmbJ64OLmul5kmWPnuHYHs'; 
