@@ -11,12 +11,11 @@ const SCOPES = 'https://www.googleapis.com/auth/drive.file';
 
 function handleClientLoad() {
     gapi.load('client:auth2', initApiClient);
-}
 
 function initApiClient() {
     gapi.client.init({
-        apiKey: 'YOUR_API_KEY',
-        clientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
+        apiKey: 'AIzaSyAynlZZ3NPud2M0yYocsKIf7PXM2xUsQns',
+        clientId: '1055087349247-oq43fdsi17et65o0vj21c15c2acc5hps.apps.googleusercontent.com',
         discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
         scope: 'https://www.googleapis.com/auth/drive.file',
     }).then(() => {
