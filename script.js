@@ -38,7 +38,7 @@ function initApiClient() {
 function handleAuthClick() {
     try {
         // gapi.auth2が初期化されているか確認
-        const authInstance = gapi.auth2?.getAuthInstance();
+        const authInstance = gapi.auth2.getAuthInstance();
         if (!authInstance) {
             alert('APIが正しく初期化されていません。ページを再読み込みしてください。');
             console.error('gapi.auth2.getAuthInstance()が未定義です。');
