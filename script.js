@@ -15,28 +15,22 @@ function initApiClient() {
         apiKey: API_KEY,
         clientId: CLIENT_ID,
         discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
-        scope: SCOPES
-    }).then(() => {
-        console.log('API client initialized');
-        // 認証状態を確認
-        checkAuth();
-    }).catch(error => {
-        console.error("APIの初期化に失敗しました:", error);
-    });
+        scope: SCOPES,
+    })
+        .then(() => {
+            console.log('Google API client initialized.');
+        })
+        .catch((error) => {
+            console.error('Error during API client initialization:', error);
+        });
 }
 
-// Google APIの認証
-function handleAuthClick(event) {
-    const authInstance = gapi.auth2.getAuthInstance();
-    if (authInstance) {
-        authInstance.signIn().then(() => {
-            uploadFile();  // 認証後にファイルアップロードを開始
-        }).catch(error => {
-            console.error("認証エラー:", error);
-        });
-    } else {
-        console.error('Google API client not initialized yet.');
-    }
+// Google APIライブラリの読み込みと初期化
+function handleClientLoad() {
+    gapi.load('client:auth2', () => {
+        console.log('Google API libraries loaded.');
+        initApiClient(); // 初期化を呼び出し
+    });
 }
 
 // 認証状態を確認
