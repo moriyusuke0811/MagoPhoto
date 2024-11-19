@@ -11,7 +11,7 @@ const SCOPES = 'https://www.googleapis.com/auth/drive.file';
 
 function handleClientLoad() {
     gapi.load('client:auth2', initApiClient);
-
+}
 function initApiClient() {
     gapi.client.init({
         apiKey: 'AIzaSyAynlZZ3NPud2M0yYocsKIf7PXM2xUsQns',
