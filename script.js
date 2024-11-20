@@ -1,62 +1,55 @@
-// クライアントID
-const CLIENT_ID = '1055087349247-oq43fdsi17et65o0vj21c15c2acc5hps.apps.googleusercontent.com'; 
-//APIきー
-const API_KEY = 'AIzaSyAynlZZ3NPud2M0yYocsKIf7PXM2xUsQns'; 
-
-// Google DriveのフォルダID
-const FOLDER_ID = '1Re2Li9tMvtCmbJ64OLmul5kmWPnuHYHs'; 
-
-// スコープ設定（Drive APIの読み書き権限）
+// 必要な設定
+const CLIENT_ID = '1055087349247-oq43fdsi17et65o0vj21c15c2acc5hps.apps.googleusercontent.com';
+const API_KEY = 'AIzaSyAynlZZ3NPud2M0yYocsKIf7PXM2xUsQns';
+const FOLDER_ID = '1Re2Li9tMvtCmbJ64OLmul5kmWPnuHYHs';
 const SCOPES = 'https://www.googleapis.com/auth/drive.file';
 
-let isApiInitialized = false;
+let isApiInitialized = false; // 初期化状態のフラグ
 
+/**
+ * Google APIをロードする
+ */
 function handleClientLoad() {
     gapi.load('client:auth2', initApiClient);
 }
 
+/**
+ * Google APIクライアントを初期化
+ */
 function initApiClient() {
     gapi.client.init({
-        apiKey: 'AIzaSyAynlZZ3NPud2M0yYocsKIf7PXM2xUsQns',
-        clientId: '1055087349247-oq43fdsi17et65o0vj21c15c2acc5hps.apps.googleusercontent.com',
+        apiKey: API_KEY,
+        clientId: CLIENT_ID,
         discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
-        scope: 'https://www.googleapis.com/auth/drive.file',
+        scope: SCOPES,
     }).then(() => {
         console.log('Google API initialized successfully.');
-        // APIクライアントが初期化された後に認証処理を開始
-        const authInstance = gapi.auth2.getAuthInstance();
-        if (authInstance) {
-            console.log('AuthInstance initialized.');
-        } else {
-            console.error('AuthInstance not initialized.');
-        }
+        isApiInitialized = true; // 初期化完了
     }).catch((error) => {
         console.error('Error initializing API client:', error);
+        alert('Google APIの初期化に失敗しました。');
     });
 }
+
 /**
- * Googleアカウントで認証
+ * 認証ボタンのクリックイベント
  */
 function handleAuthClick() {
-    try {
-        // gapi.auth2が初期化されているか確認
-        const authInstance = gapi.auth2.getAuthInstance();
-        if (!authInstance) {
-            alert('APIが正しく初期化されていません。ページを再読み込みしてください。');
-            console.error('gapi.auth2.getAuthInstance()が未定義です。');
-            return;
-        }
+    if (!isApiInitialized) {
+        alert('Google APIがまだ初期化されていません。しばらくしてから再試行してください。');
+        console.error('Google API is not initialized.');
+        return;
+    }
 
-        // ユーザーサインイン処理
-        authInstance.signIn()
-            .then(() => {
-                console.log('User signed in.');
-                uploadFile(); // サインイン成功後にファイルアップロードを実行
-            })
-            .catch((error) => {
-                console.error('Error during sign-in:', error);
-                alert('サインイン中にエラーが発生しました。');
-            });
+    try {
+        const authInstance = gapi.auth2.getAuthInstance();
+        authInstance.signIn().then(() => {
+            console.log('User signed in.');
+            uploadFile(); // サインイン成功後にファイルをアップロード
+        }).catch((error) => {
+            console.error('Error during sign-in:', error);
+            alert('サインイン中にエラーが発生しました。');
+        });
     } catch (error) {
         console.error('Unexpected error in handleAuthClick:', error);
         alert('予期しないエラーが発生しました。');
@@ -76,8 +69,8 @@ function uploadFile() {
     }
 
     const metadata = {
-        name: file.name,        // ファイル名
-        parents: [FOLDER_ID],  // アップロード先フォルダID
+        name: file.name,
+        parents: [FOLDER_ID],
     };
 
     const formData = new FormData();
@@ -104,7 +97,9 @@ function uploadFile() {
     xhr.send(formData);
 }
 
-// ファイル選択時にプレビューを表示
+/**
+ * ファイル選択時にプレビューを表示
+ */
 document.getElementById("fileInput").addEventListener("change", function () {
     const file = this.files[0];
     const preview = document.getElementById("preview");
@@ -121,5 +116,7 @@ document.getElementById("fileInput").addEventListener("change", function () {
     }
 });
 
-// アップロードボタンのクリックイベント
+/**
+ * アップロードボタンのクリックイベント
+ */
 document.getElementById("uploadButton").addEventListener("click", handleAuthClick);
