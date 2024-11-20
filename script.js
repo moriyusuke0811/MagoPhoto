@@ -9,6 +9,8 @@ const FOLDER_ID = '1Re2Li9tMvtCmbJ64OLmul5kmWPnuHYHs';
 // スコープ設定（Drive APIの読み書き権限）
 const SCOPES = 'https://www.googleapis.com/auth/drive.file';
 
+let isApiInitialized = false;
+
 function handleClientLoad() {
     gapi.load('client:auth2', initApiClient);
 }
