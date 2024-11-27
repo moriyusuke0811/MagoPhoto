@@ -25,6 +25,7 @@ function initApiClient() {
     }).then(() => {
         console.log('Google API initialized successfully.');
         isApiInitialized = true; // 初期化完了
+        document.getElementById("uploadButton").disabled = false; // ボタンを有効化
     }).catch((error) => {
         console.error('Error initializing API client:', error);
         alert('Google APIの初期化に失敗しました。');
