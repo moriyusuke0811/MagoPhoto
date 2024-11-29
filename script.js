@@ -1,8 +1,8 @@
 // 必要な設定
-const CLIENT_ID = '1055087349247-oq43fdsi17et65o0vj21c15c2acc5hps.apps.googleusercontent.com';
-const API_KEY = 'AIzaSyAynlZZ3NPud2M0yYocsKIf7PXM2xUsQns';
-const FOLDER_ID = '1Re2Li9tMvtCmbJ64OLmul5kmWPnuHYHs';
-const SCOPES = 'https://www.googleapis.com/auth/drive.file';
+const CLIENT_ID='1055087349247-oq43fdsi17et65o0vj21c15c2acc5hps.apps.googleusercontent.com';
+const API_KEY='AIzaSyAynlZZ3NPud2M0yYocsKIf7PXM2xUsQns';
+const FOLDER_ID='1Re2Li9tMvtCmbJ64OLmul5kmWPnuHYHs';
+const SCOPES='https://www.googleapis.com/auth/drive.file';
 
 let isApiInitialized = false; // 初期化状態のフラグ
 
