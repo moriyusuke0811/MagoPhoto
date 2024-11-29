@@ -4,8 +4,6 @@ const API_KEY='AIzaSyAynlZZ3NPud2M0yYocsKIf7PXM2xUsQns';
 const FOLDER_ID='1Re2Li9tMvtCmbJ64OLmul5kmWPnuHYHs';
 const SCOPES='https://www.googleapis.com/auth/drive.file';
 
-let isApiInitialized = false; // 初期化状態のフラグ
-
 /**
  * Google APIをロードする
  */
