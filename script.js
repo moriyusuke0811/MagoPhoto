@@ -5,6 +5,9 @@ const FOLDER_ID='1Re2Li9tMvtCmbJ64OLmul5kmWPnuHYHs';
 let tokenClient;
 let accessToken = null;
 
+let tokenClient = null;
+let accessToken = null;
+
 /**
  * Google Identity Servicesを初期化
  */
@@ -26,16 +29,27 @@ function initializeGIS() {
 }
 
 /**
- * 認証を処理する
+ * 認証ボタンのクリックイベント
  */
 function handleAuthClick() {
     if (!tokenClient) {
         alert('GISが初期化されていません。');
+        console.error('GIS is not initialized.');
         return;
     }
 
     tokenClient.requestAccessToken();
 }
+
+// ページ読み込み時にGoogle Identity Servicesを初期化
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        initializeGIS();
+    } catch (error) {
+        console.error('Failed to initialize GIS:', error);
+        alert('Google Identity Servicesの初期化に失敗しました。');
+    }
+});
 
 /**
  * ファイルをGoogle Driveにアップロード
