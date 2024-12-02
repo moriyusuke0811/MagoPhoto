@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="https://apis.google.com/js/api.js" async defer onload="handleClientLoad()"></script>
         <meta charset="utf-8">
         <title>Magophoto</title>
         <link rel="stylesheet" href="style.css">
         <meta name=”viewport” content=”width=device-width, initial-scale=1″>
-        <script src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>
     </head>
     <body>
         <header>
@@ -23,6 +23,7 @@
                     <input type="file" id="fileInput" accept="image/*" />
                 </label>
                 <p>ファイルを選択</p>
+                <div id="statusMessage">Google APIの初期化を待機しています...</div>
                 <img id="preview" alt="選択した画像プレビュー" />
                 <button id="uploadButton" >アップロード</button>
                 <script src="script.js" defer></script>

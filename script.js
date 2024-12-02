@@ -9,6 +9,8 @@ let isApiInitialized = false; // API初期化フラグ
  * Google APIをロードする
  */
 function handleClientLoad() {
+    // 初期化開始メッセージ
+    updateStatusMessage('Google APIを初期化しています...');
     gapi.load('client:auth2', initApiClient);
 }
 
@@ -31,6 +33,15 @@ function initApiClient() {
             console.error('Error initializing API client:', error);
             alert('Google APIの初期化に失敗しました。');
         });
+}
+/**
+ * ステータスメッセージを更新
+ */
+function updateStatusMessage(message) {
+    const statusElement = document.getElementById('statusMessage');
+    if (statusElement) {
+        statusElement.textContent = message;
+    }
 }
 
 /**
