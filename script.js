@@ -2,9 +2,6 @@
 const CLIENT_ID='1055087349247-oq43fdsi17et65o0vj21c15c2acc5hps.apps.googleusercontent.com';
 const FOLDER_ID='1Re2Li9tMvtCmbJ64OLmul5kmWPnuHYHs';
 
-let tokenClient;
-let accessToken = null;
-
 let tokenClient = null;
 let accessToken = null;
 
@@ -12,6 +9,12 @@ let accessToken = null;
  * Google Identity Servicesを初期化
  */
 function initializeGIS() {
+    if (typeof google === 'undefined') {
+        console.error('Google Identity Services script is not loaded.');
+        alert('Google Identity Servicesのスクリプトがロードされていません。');
+        return;
+    }
+
     tokenClient = google.accounts.oauth2.initTokenClient({
         client_id: CLIENT_ID,
         scope: 'https://www.googleapis.com/auth/drive.file',
@@ -50,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Google Identity Servicesの初期化に失敗しました。');
     }
 });
-
 /**
  * ファイルをGoogle Driveにアップロード
  */
