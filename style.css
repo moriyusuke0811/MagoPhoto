@@ -15,9 +15,7 @@ header {
     z-index: 1001;
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.05);
 }
-.deco{
-  position: absolute;
-}
+
 .deco-file{
     text-align:  center;
 }
