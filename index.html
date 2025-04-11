@@ -11,7 +11,22 @@
         <header>
             <div class="logooya">
                 <div style="height:20px;"></div>
-                <img href="index.html" class="logo" src="img/Logo.png" />
+                <img href="index.html" class="logo" src="img/Logo.png" /><script>
+                    const auth = firebase.auth();
+                  
+                    function loginWithGoogle() {
+                      const provider = new firebase.auth.GoogleAuthProvider();
+                      auth.signInWithPopup(provider)
+                        .then(result => {
+                          const user = result.user;
+                          console.log("ログイン成功:", user.displayName);
+                          // 必要ならUIを更新
+                        })
+                        .catch(error => {
+                          console.error("ログイン失敗:", error);
+                        });
+                    }
+                  </script>
                 <div style="height:20px;"></div>
             </div>
         </header>
