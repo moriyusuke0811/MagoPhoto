@@ -1,6 +1,21 @@
+// Firebase 構成（あなたのプロジェクト用）
+const firebaseConfig = {
+    apiKey: "AIzaSyBWSlI0Cy2sITfnLe7QR16rPsK4ms91X-I",
+    authDomain: "magophoto-46b22.firebaseapp.com",
+    projectId: "magophoto-46b22",
+    storageBucket: "magophoto-46b22.appspot.com",
+    messagingSenderId: "840299611201",
+    appId: "1:840299611201:web:757c2e61e711998849b2c0",
+    measurementId: "G-E25Z33K6LV"
+  };
+  
+  // Firebase 初期化
+firebase.initializeApp(firebaseConfig);
+  
+  // 各サービスのインスタンス取得
 const auth = firebase.auth();
 const db = firebase.firestore();
-const storage = firebase.storage(); // ← 追加！
+const storage = firebase.storage();
 
 function loginWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
