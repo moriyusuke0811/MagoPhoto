@@ -1,4 +1,5 @@
 // Firebase設定と初期化
+
 const firebaseConfig = {
     apiKey: "YOUR_API_KEY",
     authDomain: "YOUR_PROJECT.firebaseapp.com",
