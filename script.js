@@ -1,5 +1,6 @@
 const auth = firebase.auth();
 const db = firebase.firestore();
+const storage = firebase.storage(); // ← 追加！
 
 function loginWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -35,6 +36,11 @@ function signupWithGoogle() {
   const age = parseInt(document.getElementById("age").value, 10);
   const comment = document.getElementById("comment").value;
 
+  if (!nickname || isNaN(age)) {
+    alert("ニックネームと年齢を正しく入力してください");
+    return;
+  }
+
   const provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithPopup(provider)
     .then(result => {
@@ -55,38 +61,38 @@ function signupWithGoogle() {
       console.error("サインアップ失敗:", error);
     });
 }
-  
-  // ログイン状態監視（UID取得）
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      console.log("ログイン中のUID:", user.uid);
-      document.getElementById("uploadButton").disabled = false;  // ログインしていたらアップロード可能
-    } else {
-      console.log("ユーザー未ログイン");
-      document.getElementById("uploadButton").disabled = true;  // ログインしていない場合はアップロード不可
-    }
-  });
-  
-  // 画像アップロード処理
-  document.getElementById("uploadButton").addEventListener("click", () => {
-    const file = document.getElementById("fileInput").files[0];
-    const user = auth.currentUser;
-  
-    if (!file || !user) {
-      alert("画像を選択するか、ログインしてください！");
-      return;
-    }
-  
-    const uid = user.uid;
-    const storageRef = storage.ref(`images/${uid}/${file.name}`);
-  
-    storageRef.put(file)
-      .then(snapshot => {
-        alert("画像をアップロードしました！");
-        console.log("アップロード完了:", snapshot);
-      })
-      .catch(error => {
-        console.error("アップロード失敗:", error);
-        alert("アップロードに失敗しました: " + error.message);
-      });
-  });
+
+// ログイン状態監視（UID取得）
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    console.log("ログイン中のUID:", user.uid);
+    document.getElementById("uploadButton").disabled = false;
+  } else {
+    console.log("ユーザー未ログイン");
+    document.getElementById("uploadButton").disabled = true;
+  }
+});
+
+// 画像アップロード処理
+document.getElementById("uploadButton").addEventListener("click", () => {
+  const file = document.getElementById("fileInput").files[0];
+  const user = auth.currentUser;
+
+  if (!file || !user) {
+    alert("画像を選択するか、ログインしてください！");
+    return;
+  }
+
+  const uid = user.uid;
+  const storageRef = storage.ref(`images/${uid}/${file.name}`);
+
+  storageRef.put(file)
+    .then(snapshot => {
+      alert("画像をアップロードしました！");
+      console.log("アップロード完了:", snapshot);
+    })
+    .catch(error => {
+      console.error("アップロード失敗:", error);
+      alert("アップロードに失敗しました: " + error.message);
+    });
+});
