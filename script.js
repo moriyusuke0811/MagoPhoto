@@ -8,11 +8,11 @@ const firebaseConfig = {
     appId: "1:840299611201:web:757c2e61e711998849b2c0",
     measurementId: "G-E25Z33K6LV"
   };
-  
-  // Firebase 初期化
+
+// 初期化
 firebase.initializeApp(firebaseConfig);
-  
-  // 各サービスのインスタンス取得
+
+// サービスを呼び出す
 const auth = firebase.auth();
 const db = firebase.firestore();
 const storage = firebase.storage();
