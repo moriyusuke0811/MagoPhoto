@@ -28,9 +28,9 @@ function loginWithGoogle() {
 }
 
 function showSignupForm() {
-  document.getElementById("signupForm").style.display = "block";
-}
-
+    document.getElementById("signupForm").style.display = "block";
+  }
+  
 function signupWithGoogle() {
   const nickname = document.getElementById("nickname").value;
   const age = parseInt(document.getElementById("age").value, 10);
