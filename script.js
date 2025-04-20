@@ -14,7 +14,7 @@ function loginWithGoogle() {
         if (doc.exists) {
           const data = doc.data();
           document.getElementById("profileText").innerText = 
-            `ニックネーム: ${data.nickname}\n年齢: ${data.age}\nコメント: ${data.comment}`;
+            `ニックネーム: ${data.nickname}\n年齢: ${data.age}\n備考: ${data.comment}`;
           document.getElementById("profileDisplay").style.display = "block";
         } else {
           // プロフィール未登録
@@ -30,7 +30,7 @@ function loginWithGoogle() {
 function showSignupForm() {
     document.getElementById("signupForm").style.display = "block";
   }
-  
+
 function signupWithGoogle() {
   const nickname = document.getElementById("nickname").value;
   const age = parseInt(document.getElementById("age").value, 10);
