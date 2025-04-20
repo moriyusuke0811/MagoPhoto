@@ -1,4 +1,4 @@
-// Firebase 構成（あなたのプロジェクト用）
+// Firebase 構成（プロジェクト用）
 const firebaseConfig = {
     apiKey: "AIzaSyBWSlI0Cy2sITfnLe7QR16rPsK4ms91X-I",
     authDomain: "magophoto-46b22.firebaseapp.com",
