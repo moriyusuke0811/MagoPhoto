@@ -10,30 +10,25 @@
   <header>
     <div class="logooya">
       <img href="index.html" class="logo" src="img/Logo.png" />
-      <button onclick="loginWithGoogle()">Googleでログイン</button>
     </div>
-    <h2>メールでサインアップ</h2>
-    <input type="email" id="signup-email" placeholder="メールアドレス">
-    <input type="password" id="signup-password" placeholder="パスワード（6文字以上）">
-    <button onclick="signUp()">登録</button>
-    <script>
-        function signUp() {
-          const email = document.getElementById("signup-email").value;
-          const password = document.getElementById("signup-password").value;
-      
-          firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-              const user = userCredential.user;
-              console.log("登録成功:", user.email);
-              alert("サインアップ成功！ログインされました");
-              // ここでログイン済ユーザー向け画面に遷移させてもOK
-            })
-            .catch((error) => {
-              console.error("登録失敗:", error.message);
-              alert("登録エラー: " + error.message);
-            });
-        }
-      </script>
+    <!-- ボタンだけ表示 -->
+    <button onclick="loginWithGoogle()">Googleでログイン</button>
+    <button onclick="showSignupForm()">サインアップ</button>
+
+    <!-- プロフィール入力フォーム（初期は非表示） -->
+    <div id="signupForm" style="display: none;">
+    <h3>サインアップ</h3>
+    <input type="text" id="nickname" placeholder="ニックネーム"><br>
+    <input type="number" id="age" placeholder="年齢"><br>
+    <textarea id="comment" placeholder="ひとことコメント"></textarea><br>
+    <button onclick="signupWithGoogle()">Googleアカウントで登録</button>
+    </div>
+
+    <!-- プロフィール表示 -->
+    <div id="profileDisplay" style="display: none;">
+    <h3>プロフィール</h3>
+    <p id="profileText"></p>
+    </div>
   </header>
 
   <div style="height: 20px;"></div>
@@ -64,6 +59,7 @@
    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
    <!-- Firebaseの設定とscript.js -->
     <script src="script.js"></script>
 </body>

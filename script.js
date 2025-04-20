@@ -1,30 +1,60 @@
-// Firebase設定と初期化
+const auth = firebase.auth();
+const db = firebase.firestore();
 
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_ID",
-    appId: "YOUR_APP_ID",
-  };
-  
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const storage = firebase.storage();
-  
-  // Googleログイン処理
-  function loginWithGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider)
-      .then(result => {
-        console.log("ログイン成功:", result.user.displayName);
-      })
-      .catch(error => {
-        console.error("ログイン失敗:", error);
-        alert("ログインに失敗しました: " + error.message);
+function loginWithGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then(result => {
+      const user = result.user;
+      console.log("ログイン成功:", user.displayName);
+
+      // Firestoreにプロフィールがあるか確認
+      db.collection("users").doc(user.uid).get().then(doc => {
+        if (doc.exists) {
+          const data = doc.data();
+          document.getElementById("profileText").innerText = 
+            `ニックネーム: ${data.nickname}\n年齢: ${data.age}\nコメント: ${data.comment}`;
+          document.getElementById("profileDisplay").style.display = "block";
+        } else {
+          // プロフィール未登録
+          document.getElementById("signupForm").style.display = "block";
+        }
       });
-  }
+    })
+    .catch(error => {
+      console.error("ログイン失敗:", error);
+    });
+}
+
+function showSignupForm() {
+  document.getElementById("signupForm").style.display = "block";
+}
+
+function signupWithGoogle() {
+  const nickname = document.getElementById("nickname").value;
+  const age = parseInt(document.getElementById("age").value, 10);
+  const comment = document.getElementById("comment").value;
+
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then(result => {
+      const user = result.user;
+
+      // Firestoreにプロフィールを保存
+      return db.collection("users").doc(user.uid).set({
+        nickname,
+        age,
+        comment
+      });
+    })
+    .then(() => {
+      alert("サインアップ完了！");
+      location.reload();
+    })
+    .catch(error => {
+      console.error("サインアップ失敗:", error);
+    });
+}
   
   // ログイン状態監視（UID取得）
   auth.onAuthStateChanged((user) => {
