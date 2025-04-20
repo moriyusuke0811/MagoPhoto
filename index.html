@@ -1,84 +1,47 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <script src="https://accounts.google.com/gsi/client" async defer></script>
-        <meta charset="utf-8">
-        <title>Magophoto</title>
-        <link rel="stylesheet" href="style.css">
-        <meta name=”viewport” content=”width=device-width, initial-scale=1″>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magophoto</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logooya">
+      <img href="index.html" class="logo" src="img/Logo.png" />
+      <button onclick="loginWithGoogle()">Googleでログイン</button>
+    </div>
+  </header>
 
-        <!-- Firebase SDK（compat版）を読み込み -->
-        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <div style="height: 20px;"></div>
 
+  <!-- ファイル選択とアップロードフォーム -->
+  <div class="deco">
+    <div class="deco-file">
+      <label>
+        ＋
+        <input type="file" id="fileInput" accept="image/*" />
+      </label>
+      <p>ファイルを選択</p>
+      <img id="preview" alt="選択した画像プレビュー" />
+      <button id="uploadButton">アップロード</button>
+    </div>
+  </div>
 
-        <script>
-        // Firebase の構成（↓あなたのプロジェクトの設定を貼ってください）
-        const firebaseConfig = {
-            apiKey: "AIzaSyBWSlI0Cy2sITfnLe7QR16rPsK4ms91X-I",
-            authDomain: "magophoto-46b22.firebaseapp.com",
-            projectId: "magophoto-46b22",
-            storageBucket: "magophoto-46b22.firebasestorage.app",
-            messagingSenderId: "840299611201",
-            appId: "1:840299611201:web:757c2e61e711998849b2c0",
-            measurementId: "G-E25Z33K6LV"
+  <footer>
+    <ul id="home-menu">
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="anpiline.html">安否通知</a></li>
+      <li><a href="photo.html">写真</a></li>
+      <li><a href="address.html">連絡先</a></li>
+      <li><a href="#">未定</a></li>
+    </ul>
+  </footer>
 
-        };
-
-        // Firebase 初期化
-        firebase.initializeApp(firebaseConfig);
-        </script>
-    </head>
-    <body>
-        <header>
-            <div class="logooya">
-                <div style="height:20px;"></div>
-                <img href="index.html" class="logo" src="img/Logo.png" />
-                <button onclick="loginWithGoogle()">Googleでログイン</button>
-
-                <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
-                    
-                <script>
-                  const auth = firebase.auth();
-                
-                  function loginWithGoogle() {
-                    const provider = new firebase.auth.GoogleAuthProvider();
-                    auth.signInWithPopup(provider)
-                      .then(result => {
-                        const user = result.user;
-                        console.log("ログイン成功:", user.displayName);
-                        // 必要ならUIを更新
-                      })
-                      .catch(error => {
-                        console.error("ログイン失敗:", error);
-                      });
-                  }
-                </script>
-                
-                <div style="height:20px;"></div>
-            </div>
-        </header>
-        <div style="height:140px;"></div>
-        <div class="deco">
-            <div class="deco-file">
-                <label>
-                    ＋
-                    <input type="file" id="fileInput" accept="image/*" />
-                </label>
-                <p>ファイルを選択</p>
-                <img id="preview" alt="選択した画像プレビュー" />
-                <button id="uploadButton" >アップロード</button>
-                <script src="script.js"></script>
-            </div>
-        </div>
-        <footer>
-            <ul id="home-menu">
-                <li><a href="index.html">ホーム</a></li>
-                <li><a href="anpiline.html">安否通知</a></li>
-                <li><a href="photo.html">写真</a></li>
-                <li><a href="address.html">連絡先</a></li>
-                <li><a href="#">未定</a></li>
-        </footer>
-
-    </body>
+  <script src="script.js"></script>
+</body>
 </html>

@@ -1,127 +1,61 @@
-// 必要な設定
-const CLIENT_ID='1055087349247-oq43fdsi17et65o0vj21c15c2acc5hps.apps.googleusercontent.com';
-const FOLDER_ID='1Re2Li9tMvtCmbJ64OLmul5kmWPnuHYHs';
-
-let tokenClient = null;
-let accessToken = null;
-
-/**
- * Google Identity Servicesを初期化
- */
-function initializeGIS() {
-    if (typeof google === 'undefined') {
-        console.error('Google Identity Services script is not loaded.');
-        alert('Google Identity Servicesのスクリプトがロードされていません。');
-        return;
-    }
-
-    tokenClient = google.accounts.oauth2.initTokenClient({
-        client_id: CLIENT_ID,
-        scope: 'https://www.googleapis.com/auth/drive.file',
-        callback: (response) => {
-            if (response.error) {
-                console.error('Error during token request:', response);
-                alert('トークン取得中にエラーが発生しました。');
-            } else {
-                console.log('Access token acquired.');
-                accessToken = response.access_token;
-                uploadFile();
-            }
-        },
-    });
-}
-
-/**
- * 認証ボタンのクリックイベント
- */
-function handleAuthClick() {
-    if (!tokenClient) {
-        alert('GISが初期化されていません。');
-        console.error('GIS is not initialized.');
-        return;
-    }
-
-    tokenClient.requestAccessToken();
-}
-
-// ページ読み込み時にGoogle Identity Servicesを初期化
-document.addEventListener('DOMContentLoaded', () => {
-    try {
-        initializeGIS();
-    } catch (error) {
-        console.error('Failed to initialize GIS:', error);
-        alert('Google Identity Servicesの初期化に失敗しました。');
-    }
-});
-/**
- * ファイルをGoogle Driveにアップロード
- */
-function uploadFile() {
-    const fileInput = document.getElementById('fileInput');
-    const file = fileInput.files[0];
-
-    if (!file) {
-        alert('ファイルを選択してください。');
-        return;
-    }
-
-    const metadata = {
-        name: file.name,
-        parents: [FOLDER_ID],
-    };
-
-    const formData = new FormData();
-    formData.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
-    formData.append('file', file);
-
-    fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
-        method: 'POST',
-        headers: new Headers({
-            Authorization: `Bearer ${accessToken}`,
-        }),
-        body: formData,
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.error) {
-                console.error('Upload failed:', data.error);
-                alert('アップロードに失敗しました。');
-            } else {
-                console.log('Upload successful:', data);
-                alert('アップロード成功！');
-            }
-        })
-        .catch((error) => {
-            console.error('Error during upload:', error);
-            alert('アップロード中にエラーが発生しました。');
-        });
-}
-
-/**
- * ファイル選択時のプレビュー
- */
-document.getElementById('fileInput').addEventListener('change', function () {
-    const file = this.files[0];
-    const preview = document.getElementById('preview');
-
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            preview.src = e.target.result;
-            preview.style.display = 'block';
-        };
-        reader.readAsDataURL(file);
+// Firebase設定と初期化
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_MESSAGING_ID",
+    appId: "YOUR_APP_ID",
+  };
+  
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const storage = firebase.storage();
+  
+  // Googleログイン処理
+  function loginWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider)
+      .then(result => {
+        console.log("ログイン成功:", result.user.displayName);
+      })
+      .catch(error => {
+        console.error("ログイン失敗:", error);
+        alert("ログインに失敗しました: " + error.message);
+      });
+  }
+  
+  // ログイン状態監視（UID取得）
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      console.log("ログイン中のUID:", user.uid);
+      document.getElementById("uploadButton").disabled = false;  // ログインしていたらアップロード可能
     } else {
-        preview.style.display = 'none';
+      console.log("ユーザー未ログイン");
+      document.getElementById("uploadButton").disabled = true;  // ログインしていない場合はアップロード不可
     }
-});
-
-/**
- * アップロードボタンのクリックイベント
- */
-document.getElementById('uploadButton').addEventListener('click', handleAuthClick);
-
-/**
- * ページロード時にGoogle Identity Servicesを初期化
- */
-document.addEventListener('DOMContentLoaded', initializeGIS);
+  });
+  
+  // 画像アップロード処理
+  document.getElementById("uploadButton").addEventListener("click", () => {
+    const file = document.getElementById("fileInput").files[0];
+    const user = auth.currentUser;
+  
+    if (!file || !user) {
+      alert("画像を選択するか、ログインしてください！");
+      return;
+    }
+  
+    const uid = user.uid;
+    const storageRef = storage.ref(`images/${uid}/${file.name}`);
+  
+    storageRef.put(file)
+      .then(snapshot => {
+        alert("画像をアップロードしました！");
+        console.log("アップロード完了:", snapshot);
+      })
+      .catch(error => {
+        console.error("アップロード失敗:", error);
+        alert("アップロードに失敗しました: " + error.message);
+      });
+  });
