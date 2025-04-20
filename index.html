@@ -12,6 +12,28 @@
       <img href="index.html" class="logo" src="img/Logo.png" />
       <button onclick="loginWithGoogle()">Googleでログイン</button>
     </div>
+    <h2>メールでサインアップ</h2>
+    <input type="email" id="signup-email" placeholder="メールアドレス">
+    <input type="password" id="signup-password" placeholder="パスワード（6文字以上）">
+    <button onclick="signUp()">登録</button>
+    <script>
+        function signUp() {
+          const email = document.getElementById("signup-email").value;
+          const password = document.getElementById("signup-password").value;
+      
+          firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+              const user = userCredential.user;
+              console.log("登録成功:", user.email);
+              alert("サインアップ成功！ログインされました");
+              // ここでログイン済ユーザー向け画面に遷移させてもOK
+            })
+            .catch((error) => {
+              console.error("登録失敗:", error.message);
+              alert("登録エラー: " + error.message);
+            });
+        }
+      </script>
   </header>
 
   <div style="height: 20px;"></div>
