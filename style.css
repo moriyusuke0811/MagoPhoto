@@ -1,86 +1,95 @@
-html{
+html {
   font-family: Arial;
 }
-.logo{
-    width: 320px;
-    height: 80px;
-}
-header {
-    position: fixed;
-    width: 100%;
-    left: 0;
-    top: 0;
-    margin: 0;
-    background-color: #ffffff;
-    z-index: 1001;
-    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.05);
+
+.logo {
+  width: 320px;
+  height: 80px;
 }
 
-.deco-file{
-    text-align:  center;
+header {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  margin: 0;
+  background-color: #ffffff;
+  z-index: 1001;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.05);
 }
-.deco-file label{
-    display: inline-block;
-    border: 8px solid #1E88E5;
-    color: #1E88E5;
-    text-align: center;
-    font-weight: bold;
-    font-size: 120px;
-    padding: 4px 4px;
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
+
+.deco-file {
+  text-align: center;
 }
-.deco-file label:hover{
-    cursor: pointer;
-    color: #ffffff;
-    background-color: #1E88E5;
+
+.deco-file label {
+  display: inline-block;
+  border: 8px solid #1E88E5;
+  color: #1E88E5;
+  text-align: center;
+  font-weight: bold;
+  font-size: 120px;
+  padding: 4px 4px;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
 }
-.deco-file input[type="file"]{
-    display: none;
+
+.deco-file label:hover {
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #1E88E5;
 }
+
+.deco-file input[type="file"] {
+  display: none;
+}
+
 footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 80px;
-    background: #ffffff;
-    margin-right: auto;
-    box-shadow: 0 -5px 8px rgb(0, 0, 0, 0.05);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  background: #ffffff;
+  margin-right: auto;
+  box-shadow: 0 -5px 8px rgba(0, 0, 0, 0.05);
 }
-#home-menu{
+
+#home-menu {
   display: flex;
   justify-content: center;
 }
+
 #home-menu li {
   list-style: none;
   margin: 40px;
   width: 800px;
 }
+
 #home-menu li a {
   text-decoration: none;
   color: #000000;
   font-weight: bold;
   font-size: 1.5em;
 }
+
 #preview {
   margin-top: 20px;
-  max-width: 100%;  /* 横幅を親要素に合わせて調整 */
-  max-height: 300px;  /* 高さは最大300px */
+  max-width: 100%;
+  max-height: 300px;
   border: 1px solid #ccc;
-  display: block; /* プレビューを表示 */
-  margin-bottom: 20px; /* プレビューとボタンの間に余白 */
+  display: block;
+  margin-bottom: 20px;
 }
 
-/* ファイル選択とアップロードボタンを中央揃え */
 #uploadButton {
   display: block;
-  margin: 20px auto; /* ボタンを中央に配置 */
+  margin: 20px auto;
 }
-/* モーダルの背景 */
+
 .modal {
-  display: none; /* 初期状態では非表示 */
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -88,21 +97,19 @@ footer {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4); /* 半透明の背景 */
+  background-color: rgba(0,0,0,0.4);
 }
 
-/* モーダルコンテンツ */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; /* 上から15%の位置に中央揃え */
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* 幅は80% */
-  max-width: 400px; /* 最大幅は400px */
+  width: 80%;
+  max-width: 400px;
   border-radius: 5px;
 }
 
-/* 閉じるボタン */
 .close {
   color: #aaa;
   float: right;

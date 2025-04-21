@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css" />
   <title>Magophoto</title>
 </head>
 <body>
   <header>
     <div class="logooya">
-      <img href="index.html" class="logo" src="img/Logo.png" />
+      <img class="logo" src="img/Logo.png" alt="Logo" />
     </div>
-    <!-- ボタンだけ表示 -->
     <button onclick="loginWithGoogle()">Googleでログイン</button>
-    <!-- サインアップボタン -->
     <button onclick="openSignupForm()">サインアップ</button>
+    <button onclick="logout()">ログアウト</button>
 
-    <!-- ポップアップフォーム -->
+    <!-- サインアップモーダル -->
     <div id="signupModal" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeSignupForm()">&times;</span>
@@ -27,14 +26,14 @@
         <button onclick="signupWithGoogle()">Googleアカウントで登録</button>
       </div>
     </div>
-    <button onclick="logout()">ログアウト</button>
 
     <!-- プロフィール表示 -->
     <div id="profileDisplay" style="display: none;">
-    <h3>プロフィール</h3>
-    <p id="profileText"></p>
+      <h3>プロフィール</h3>
+      <p id="profileText"></p>
     </div>
   </header>
+
   <div style="height:140px;"></div>
   <div style="height: 20px;"></div>
 
@@ -47,7 +46,7 @@
       </label>
       <p>ファイルを選択</p>
       <img id="preview" alt="選択した画像プレビュー" />
-      <button id="uploadButton">アップロード</button>
+      <button id="uploadButton" disabled>アップロード</button>
     </div>
   </div>
 
@@ -60,12 +59,14 @@
       <li><a href="#">未定</a></li>
     </ul>
   </footer>
+
   <!-- Firebase SDKs (compat版) -->
-   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-   <!-- Firebaseの設定とscript.js --> 
-   <script src="script.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+  <!-- Firebaseの設定とscript.js -->
+  <script src="script.js"></script>
 </body>
 </html>

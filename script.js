@@ -42,22 +42,22 @@ window.addEventListener("DOMContentLoaded", () => {
       });
   };
 
-// ポップアップを表示する関数
-function openSignupForm() {
-  document.getElementById("signupModal").style.display = "block";
-}
+  window.openSignupForm = function() {
+    document.getElementById("signupModal").style.display = "block";
+  };
+  
+  window.closeSignupForm = function() {
+    document.getElementById("signupModal").style.display = "none";
+  };
 
-// ポップアップを非表示にする関数
-function closeSignupForm() {
-  document.getElementById("signupModal").style.display = "none";
-}
   // モーダルの外側をクリックしたときに閉じる
-window.onclick = function(event) {
-  const modal = document.getElementById("signupModal");
-  if (event.target == modal) {
-    modal.style.display = "none";
+  window.onclick = function(event) {
+    const modal = document.getElementById("signupModal");
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
   }
-}
+
   // Googleでサインアップ
   window.signupWithGoogle = function () {
     const nickname = document.getElementById("nickname").value;
@@ -125,8 +125,9 @@ window.onclick = function(event) {
       });
   });
 });
+
 function logout() {
-  auth.signOut()
+  firebase.auth().signOut()
     .then(() => {
       alert("ログアウトしました");
       location.reload();
