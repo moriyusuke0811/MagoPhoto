@@ -42,11 +42,22 @@ window.addEventListener("DOMContentLoaded", () => {
       });
   };
 
-  // サインアップフォーム表示
-  window.showSignupForm = function () {
-    document.getElementById("signupForm").style.display = "block";
-  };
+// ポップアップを表示する関数
+function openSignupForm() {
+  document.getElementById("signupModal").style.display = "block";
+}
 
+// ポップアップを非表示にする関数
+function closeSignupForm() {
+  document.getElementById("signupModal").style.display = "none";
+}
+  // モーダルの外側をクリックしたときに閉じる
+window.onclick = function(event) {
+  const modal = document.getElementById("signupModal");
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
   // Googleでサインアップ
   window.signupWithGoogle = function () {
     const nickname = document.getElementById("nickname").value;
