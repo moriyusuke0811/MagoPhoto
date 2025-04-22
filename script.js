@@ -135,8 +135,8 @@ function logout() {
     .catch((error) => {
       console.error("ログアウト失敗:", error);
     });
-   // ファイル選択時にプレビュー表示
-   document.getElementById("fileInput").addEventListener("change", (event) => {
+     // 画像選択時にプレビューを表示
+  document.getElementById("fileInput").addEventListener("change", (event) => {
     const file = event.target.files[0];
     const preview = document.getElementById("preview");
 
@@ -144,7 +144,7 @@ function logout() {
       const reader = new FileReader();
       reader.onload = function(e) {
         preview.src = e.target.result;
-        preview.style.display = "block";
+        preview.style.display = "block"; // 表示
       };
       reader.readAsDataURL(file);
     } else {
