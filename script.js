@@ -135,4 +135,21 @@ function logout() {
     .catch((error) => {
       console.error("ログアウト失敗:", error);
     });
+   // ファイル選択時にプレビュー表示
+   document.getElementById("fileInput").addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    const preview = document.getElementById("preview");
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "";
+      preview.style.display = "none";
+    }
+  });
 }
